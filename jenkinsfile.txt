@@ -1,0 +1,65 @@
+﻿def builtDockerImage
+
+
+
+pipeline{
+
+
+
+agent any
+
+
+
+stages {
+
+
+
+stage('Clone repo') {
+
+            steps {
+
+                git url: 'https://github.com/jayamehta29/JenkinsDocker.git', branch: 'master'
+
+            }
+
+        }
+
+
+
+       stage('Build image') {
+
+            steps {
+
+                script {
+
+                    builtDockerImage = docker.build "jayamehta2944/dockerjenkins:v1.0"
+
+                }
+
+            }
+
+        }
+
+       
+
+        stage('Push image') {
+
+            steps {
+
+                script {
+
+                        docker.withRegistry('', 'docker-cred') {
+
+                            builtDockerImage.push()
+
+                        }
+
+                }
+
+            }
+
+        }
+
+    }
+
+}
