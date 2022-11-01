@@ -1,18 +1,9 @@
-﻿def builtDockerImage
-
-
+def builtDockerImage
 
 pipeline{
-
-
-
 agent any
 
-
-
-stages {
-
-
+stages{
 
 stage('Clone repo') {
 
